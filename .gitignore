@@ -1,0 +1,30 @@
+# === IDEs ===
+.idea/
+*.iml
+.vscode/
+
+# === Maven ===
+target/
+*.jar
+*.war
+
+# === Node / Frontend ===
+node_modules/
+dist/
+.angular/
+
+# === Docker ===
+postgres_data/
+
+# === Env files (NUNCA subir secrets) ===
+.env
+.env.local
+*.env
+
+# === OS ===
+.DS_Store
+Thumbs.db
+
+# === Logs ===
+*.log
+logs/
