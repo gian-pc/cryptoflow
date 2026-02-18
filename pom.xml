@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Identidad del proyecto padre -->
+    <groupId>com.cryptoflow</groupId>
+    <artifactId>cryptoflow-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging> <!-- CLAVE: pom significa que es un padre, no genera JAR -->
+
+    <name>CryptoFlow Parent</name>
+    <description>Real-time cryptocurrency monitoring platform</description>
+
+    <!-- Los módulos que agrupa este padre -->
+    <modules>
+        <module>ms-batch</module>
+        <module>ms-price-enricher</module>
+        <module>ms-alert-engine</module>
+        <module>ms-api</module>
+    </modules>
+
+    <!-- Hereda de Spring Boot para gestión automática de versiones -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.2</version>
+        <relativePath/>
+    </parent>
+
+    <!-- Versiones centralizadas — un solo lugar para actualizarlas -->
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Versiones de dependencias -->
+        <spring-kafka.version>3.1.1</spring-kafka.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
+        <testcontainers.version>1.19.3</testcontainers.version>
+    </properties>
+
+    <!-- dependencyManagement: define versiones SIN añadir la dependencia -->
+    <!-- Los módulos hijos la declaran sin versión, la toman de aquí -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- Testcontainers BOM (Bill of Materials) -->
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers-bom</artifactId>
+                <version>${testcontainers.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- Dependencias que TODOS los módulos heredan automáticamente -->
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>
